@@ -1,0 +1,56 @@
+<script>
+let activeEffect
+
+class Dep {
+  subscribers = new Set()
+  depend() {
+    if (activeEffect) {
+      this.subscribers.add(activeEffect)
+    }
+  }
+  notify() {
+    this.subscribers.forEach(effect => effect())
+  }
+}
+
+function watchEffect(effect) {
+  activeEffect = effect
+  effect()
+  activeEffect = null
+}
+
+function reactive(raw) {
+  // use Object.defineProperty
+  // 1. iterate over the existing keys
+  Object.keys(raw).forEach(key => {
+    // 2. for each key: create a corresponding dep
+    const dep = new Dep()
+
+    // 3. rewrite the property into getter/setter
+    let realValue = raw[key]
+    Object.defineProperty(raw, key, {
+      get() {
+        // 4. call dep methods inside getter/setter
+        dep.depend()
+        return realValue
+      },
+      set(newValue) {
+        realValue = newValue
+        dep.notify()
+      }
+    })
+  })
+  return raw
+}
+
+// usage -----------------------
+const state = reactive({
+  count: 0
+})
+
+watchEffect(() => {
+  console.log(state.count)
+}) // 0
+
+state.count++ // 1
+</script>

@@ -1,3 +1,22 @@
+<script src="https://unpkg.com/vue@next"></script>
+
+<style>
+  .mt-4 {
+    margin: 10px;
+  }
+</style>
+
+<div id="app">
+  <Stack size="4">
+    <div>one</div>
+    <div>two</div>
+    <Stack size="4">
+      <div>three</div>
+      <div>four</div>
+    </Stack>
+  </Stack>
+</div>
+
 <script>
 let activeEffect
 
