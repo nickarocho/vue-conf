@@ -1,0 +1,27 @@
+<script>
+  class Dep {
+    subcribers = new Set()
+    depend() {
+      // TODO
+      watchEffect();
+    }
+    notify() {
+      // TODO
+    }
+  }
+
+  function watchEffect(effect) {
+    // TODO
+  }
+
+  // usage -----------------------
+
+  const dep = new Dep()
+
+  watchEffect(() => {
+    console.log('effect is run')
+    dep.depend()
+  }) // effect is run
+
+  dep.notify() // effect is run
+</script>

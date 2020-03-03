@@ -1,0 +1,33 @@
+<div id="app"></div>
+
+<script>
+  function h(tag, props, children) {
+    return { tag, props, children }
+  }
+
+  function mount(vnode, container) {
+    const el = document.createElement(vnode.tag)
+    // props
+    if (vnode.props) {
+      // ... set props
+    }
+    if (vnode.children) {
+      // ... handle children
+      if (typeof vnode.children === 'string') {
+        el.textContent = vnode.children
+      } else {
+        vnode.children.forEach(child => {
+          mount(child, el)
+        })
+      }
+    }
+    container.appendChild(el)
+  }
+
+  const tree = h('div', { class: 'red' }, [
+    h('span', null, 'hello'),
+    h('span', null, 'world')
+  ])
+
+  mount(tree, document.querySelector('#app'))
+</script>

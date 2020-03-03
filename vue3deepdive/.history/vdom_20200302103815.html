@@ -1,0 +1,22 @@
+<div id="app"></div>
+
+<script>
+  function h(tag, props, children) {
+    return `
+      <tag>
+
+      </tag>
+    `
+  }
+
+  function mount(vnode, container) {
+
+  }
+
+  const tree = h('div', [
+    h('span', null, 'hello'),
+    h('span', null, 'world')
+  ])
+
+  mount(tree, document.querySelector('#app'))
+</script>

@@ -1,0 +1,32 @@
+<script src="https://unpkg.com/vue@next"></script>
+
+<div id="app">
+  <div v-if="isPending">loading...</div>
+  <div v-else-if="data">{{ data }}</div>
+  <div v-else-if="error">Error: {{ error.msg }}</div>
+</div>
+
+<script>
+function useFetch(url) {
+  console.log(url);
+  const data = 'hi'
+}
+
+const App = {
+  setup(props) {
+    const {
+      data,
+      isPending,
+      error
+    } = useFetch(`https://jsonplaceholder.typicode.com/posts/1`)
+
+    return {
+      data,
+      isPending,
+      error
+    }
+  }
+}
+
+Vue.createApp(App).mount('#app')
+</script>
